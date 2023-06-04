@@ -1,0 +1,26 @@
+data Race HalfElf {
+  field name = "Half-Elf";
+  field traits = [ .Darkvision60, .Elf_FeyAncestry ];
+  field languages = [ .Common, .Elvish ];
+  field subrace = 0;
+  field speed = 30;
+  
+  fun onLevelUp(level) { subrace.onLevelUp(level); }
+  
+  fun onSelect() {
+    abilityIncrease(.Charisma, 2);
+    var inc = chooseNByKind("__ASI", 2, "Ability");
+    for(i in inc) { abilityIncrease(i, 1); }
+    onRestore({
+      "skills" = chooseNByKind("skills", 2, "Skill"),
+      "language" = chooseDataByKind("language", "Language")
+    }, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    addRacialTraits(traits);
+    addLanguages(languages);
+    addLanguages([choices["language"]]);
+    addSkillProficiencies(choices["skills"]);
+  }
+}

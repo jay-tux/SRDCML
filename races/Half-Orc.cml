@@ -1,0 +1,32 @@
+instance Trait HalfOrc_RelentlessEndurance[
+  "Relentless Endurance",
+  "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest."
+];
+
+instance Trait HalfOrc_SavageAttacks[
+  "Savage Attacks",
+  "When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit."
+];
+
+data Race HalfOrc {
+  field name = "Half-Orc";
+  field traits = [ .Darkvision60, .HalfOrc_RelentlessEndurance, .HalfOrc_SavageAttacks ];
+  field languages = [ .Common, .L_Orc ];
+  field subrace = 0;
+  field speed = 30;
+  
+  fun onLevelUp(level) { subrace.onLevelUp(level); }
+  
+  fun onSelect() {
+    abilityIncrease(.Strength, 2);
+    abilityIncrease(.Constitution, 1);
+    
+    onRestore({}, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    addRacialTraits(traits);
+    addLanguages(languages);
+    addSkillProficiencies([ .Intimidation ]);
+  }
+}

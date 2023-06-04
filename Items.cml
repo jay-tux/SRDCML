@@ -1,0 +1,502 @@
+// Simple Melee Weapons
+instance Item Club["Club", 2.0, [
+  meleeWeaponAction("Club", [simpleWeapon], .Strength, 5, [1d4, .Bludgeoning], [])
+], sp(1), [simpleWeapon, meleeWeapon], [.Light]];
+
+instance Item Dagger["Dagger", 1.0, [
+  meleeWeaponAction("Dagger (STR) (melee)", [simpleWeapon], .Strength, 5, [1d4, .Piercing], []),
+  meleeWeaponAction("Dagger (DEX) (melee)", [simpleWeapon], .Dexterity, 5, [1d4, .Piercing], []),
+  rangedWeaponAction("Dagger (STR) (ranged)", [simpleWeapon], .Strength, 20, 60, [1d4, .Piercing], []),
+  rangedWeaponAction("Dagger (DEX) (ranged)", [simpleWeapon], .Dexterity, 20, 60, [1d4, .Piercing], [])
+], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+
+instance Item Greatclub["Greatclub", 10.0, [
+  meleeWeaponAction("Greatclub", [simpleWeapon], .Strength, 5, [1d8, .Bludgeoning], [])
+], sp(2), [simpleWeapon, meleeWeapon], [.TwoHanded]];
+
+instance Item Handaxe["Handaxe", 2.0, [
+  meleeWeaponAction("Handaxe (melee)", [simpleWeapon], .Strength, 5, [1d6, .Slashing], []),
+  rangedWeaponAction("Handaxe (ranged)", [simpleWeapon], .Strength, 20, 60, [1d6, .Slashing], [])
+], gp(5), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+
+instance Item Javelin["Javelin", 2.0, [
+  meleeWeaponAction("Javelin (melee)", [simpleWeapon], .Strength, 5, [1d6, .Piercing], []),
+  rangedWeaponAction("Javelin (ranged)", [simpleWeapon], .Strength, 30, 120, [1d6, .Piercing], [])
+], sp(5), [simpleWeapon, meleeWeapon, rangedWeapon], []];
+
+instance Item LightHammer["Light Hammer", 2.0, [
+  meleeWeaponAction("Light Hammer (melee)", [simpleWeapon], .Strength, 5, [1d4, .Bludgeoning], []),
+  rangedWeaponAction("Light Hammer (ranged)", [simpleWeapon], .Strength, 30, 120, [1d4, .Bludgeoning], [])
+], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+
+instance Item Mace["Mace", 4.0, [
+  meleeWeaponAction("Mace", [simpleWeapon], .Strength, 5, [1d6, .Bludgeoning], [])
+], gp(5), [simpleWeapon, meleeWeapon], []];
+
+instance Item Quarterstaff["Quarterstaff", 4.0, [
+  meleeWeaponAction("Quarterstaff (one-handed)", [simpleWeapon], .Strength, 5, [1d6, .Bludgeoning], []),
+  meleeWeaponAction("Quarterstaff (two-handed)", [simpleWeapon], .Strength, 5, [1d8, .Bludgeoning], [])
+], sp(2), [simpleWeapon, meleeWeapon], [.VersatileD8]];
+
+instance Item Sickle["Sickle", 2.0, [
+  meleeWeaponAction("Sickle", [simpleWeapon], .Strength, 5, [1d4, .Slashing], [])
+], gp(1), [simpleWeapon, meleeWeapon], []];
+
+instance Item Spear["Spear", 3.0, [
+  meleeWeaponAction("Spear (melee) (one-handed)", [simpleWeapon], .Strength, 5, [1d6, .Piercing], []),
+  meleeWeaponAction("Spear (melee) (two-handed)", [simpleWeapon], .Strength, 5, [1d8, .Piercing], []),
+  rangedWeaponAction("Spear (ranged)", [simpleWeapon], .Strength, 20, 60, [1d6, .Piercing], [])
+], gp(1), [simpleWeapon, meleeWeapon], [.VersatileD8]];
+
+// Simple Ranged Weapons
+instance Item LightCrossbow["Light Crossbow", 5.0, [
+  rangedWeaponAction("Light Crossbow", [simpleWeapon], .Dexterity, 80, 320, [1d8, .Piercing], [])
+], gp(25), [simpleWeapon, rangedWeapon], [.Ammunition, .Loading, .TwoHanded]];
+
+instance Item Dart["Dart", 0.25, [
+  rangedWeaponAction("Dart (STR)", [simpleWeapon], .Strength, 20, 60, [1d4, .Piercing], []),
+  rangedWeaponAction("Dart (DEX)", [simpleWeapon], .Dexterity, 20, 60, [1d4, .Piercing], [])
+], cp(5), [simpleWeapon, rangedWeapon], []];
+
+instance Item Shortbow["Shortbow", 2.0, [
+  rangedWeaponAction("Shortbow", [simpleWeapon], .Dexterity, 80, 320, [1d6, .Piercing], [])
+], gp(25), [simpleWeapon, rangedWeapon], [.Ammunition, .TwoHanded]];
+
+instance Item Sling["Sling", 0.0, [
+  rangedWeaponAction("Sling", [simpleWeapon], .Dexterity, 30, 120, [1d4, .Bludgeoning], [])
+], sp(1), [simpleWeapon, rangedWeapon], [.Ammunition]];
+
+// Martial Melee Weapons
+instance Item Battleaxe["Battleaxe", 4.0, [
+  meleeWeaponAction("Battleaxe (one-handed)", [martialWeapon], .Strength, 5, [1d8, .Slashing], []),
+  meleeWeaponAction("Battleaxe (two-handed)", [martialWeapon], .Strength, 5, [1d10, .Slashing], [])
+], gp(10), [martialWeapon, meleeWeapon], [.VersatileD10]];
+
+instance Item Flail["Flail", 2.0, [
+  meleeWeaponAction("Flail", [martialWeapon], .Strength, 5, [1d8, .Bludgeoning], [])
+], gp(10), [martialWeapon, meleeWeapon], []];
+
+instance Item Glaive["Glaive", 6.0, [
+  meleeWeaponAction("Glaive", [martialWeapon], .Strength, 10, [1d10, .Slashing], [])
+], gp(20), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance Item Greataxe["Greataxe", 7.0, [
+  meleeWeaponAction("Greataxe", [martialWeapon], .Strength, 5, [1d12, .Slashing], [])
+], gp(30), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance Item Greatsword["Greatsword", 6.0, [
+  meleeWeaponAction("Greatsword", [martialWeapon], .Strength, 5, [2d6, .Slashing], [])
+], gp(50), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance Item Halberd["Halberd", 6.0, [
+  meleeWeaponAction("Halberd", [martialWeapon], .Strength, 10, [1d10, .Slashing], [])
+], gp(20), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance ItemTrait LanceTrait["Lance (Trait)", "You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted."];
+instance Item Lance["Lance", 2.0, [
+  meleeWeaponAction("Lance", [martialWeapon], .Strength, 10, [1d12, .Piercing], [])
+], gp(10), [martialWeapon, meleeWeapon], [.LanceTrait]];
+
+instance Item Longsword["Longsword", 3.0, [
+  meleeWeaponAction("Longsword (one-handed)", [martialWeapon], .Strength, 5, [1d8, .Slashing], []),
+  meleeWeaponAction("Longsword (two-handed)", [martialWeapon], .Strength, 5, [1d10, .Slashing], [])
+], gp(15), [martialWeapon, meleeWeapon], [.VersatileD10]];
+
+instance Item Maul["Maul", 10.0, [
+  meleeWeaponAction("Maul", [martialWeapon], .Strength, 5, [2d6, .Bludgeoning], [])
+], gp(10), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance Item Morningstar["Morningstar", 4.0, [
+  meleeWeaponAction("Morningstar", [martialWeapon], .Strength, 5, [1d8, .Piercing], [])
+], gp(15), [martialWeapon, meleeWeapon], []];
+
+instance Item Pike["Pike", 18.0, [
+  meleeWeaponAction("Pike", [martialWeapon], .Strength, 10, [1d10, .Piercing], [])
+], gp(5), [martialWeapon, meleeWeapon], [.Heavy, .TwoHanded]];
+
+instance Item Rapier["Rapier", 2.0, [
+  meleeWeaponAction("Rapier (STR)", [martialWeapon], .Strength, 5, [1d8, .Piercing], []),
+  meleeWeaponAction("Rapier (DEX)", [martialWeapon], .Dexterity, 5, [1d8, .Piercing], [])
+], gp(25), [martialWeapon, meleeWeapon], []];
+
+instance Item Scimitar["Scimitar", 3.0, [
+  meleeWeaponAction("Scimitar (STR)", [martialWeapon], .Strength, 5, [1d6, .Slashing], []),
+  meleeWeaponAction("Scimitar (DEX)", [martialWeapon], .Dexterity, 5, [1d6, .Slashing], [])
+], gp(25), [martialWeapon, meleeWeapon], [.Light]];
+
+instance Item Shortsword["Shortsword", 2.0, [
+  meleeWeaponAction("Shortsword (STR)", [martialWeapon], .Strength, 5, [1d6, .Piercing], []),
+  meleeWeaponAction("Shortsword (DEX)", [martialWeapon], .Dexterity, 5, [1d6, .Piercing], [])
+], gp(10), [martialWeapon, meleeWeapon], []];
+
+instance Item Trident["Trident", 4.0, [
+  meleeWeaponAction("Trident (melee) (one-handed)", [martialWeapon], .Strength, 5, [1d6, .Piercing], []),
+  meleeWeaponAction("Trident (melee) (two-handed)", [martialWeapon], .Strength, 5, [1d8, .Piercing], []),
+  rangedWeaponAction("Trident (ranged)", [martialWeapon], .Strength, 20, 60, [1d6, .Piercing], [])
+], gp(5), [martialWeapon, meleeWeapon, rangedWeapon], [.VersatileD8]];
+
+instance Item WarPick["War Pick", 2.0, [
+  meleeWeaponAction("War Pick", [martialWeapon], .Strength, 5, [1d8, .Piercing], [])
+], gp(5), [martialWeapon, meleeWeapon], []];
+
+instance Item Warhammer["Warhammer", 2.0, [
+  meleeWeaponAction("Warhammer (one-handed)", [martialWeapon], .Strength, 5, [1d8, .Bludgeoning], []),
+  meleeWeaponAction("Warhammer (two-handed)", [martialWeapon], .Strength, 5, [1d10, .Bludgeoning], [])
+], gp(15), [martialWeapon, meleeWeapon], [.VersatileD10]];
+
+instance Item Whip["Whip", 3.0, [
+  meleeWeaponAction("Whip (STR)", [martialWeapon], .Strength, 5, [1d4, .Slashing], []),
+  meleeWeaponAction("Whip (DEX)", [martialWeapon], .Dexterity, 5, [1d4, .Slashing], [])
+], gp(2), [martialWeapon, meleeWeapon], []];
+
+// Martial Ranged Weapons
+// TODO: blowgun -> deals exact damage, no dice involved
+// instance Item Blowgun["Blowgun", 1.0, [
+//   rangedWeaponAction("Blowgun", [martialWeapon], .Dexterity, 25, 100, [1, .Piercing], [])
+// ], gp(25), [martialWeapon, rangedWeapon], [.Ammunition, .Loading]];
+
+instance Item HandCrossbow["Hand Crossbow", 3.0, [
+  rangedWeaponAction("Hand Crossbow", [martialWeapon], .Dexterity, 30, 120, [1d6, .Piercing], [])
+], gp(75), [martialWeapon, rangedWeapon], [.Ammunition, .Loading, .Light]];
+
+instance Item HeavyCrossbow["Heavy Crossbow", 18.0, [
+  rangedWeaponAction("Heavy Crossbow", [martialWeapon], .Dexterity, 150, 400, [1d10, .Piercing], [])
+], gp(50), [martialWeapon, rangedWeapon], [.Ammunition, .Loading, .TwoHanded, .Heavy]];
+
+instance Item Longbow["Longbow", 2.0, [
+  rangedWeaponAction("Longbow", [martialWeapon], .Dexterity, 150, 600, [1d8, .Piercing], [])
+], gp(50), [martialWeapon, rangedWeapon], [.Ammunition, .TwoHanded, .Heavy]];
+
+instance ItemTrait NetTrait[
+  "Net (Trait)", 
+  "A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net.
+When you use an action, bonus action, or reaction to atlack with a net, you can make only one attack regardless of the number of attacks you can normally make."
+];
+// TODO: net
+
+// Armor
+instance Armor PaddedArmor["Padded Armor", 8.0, gp(5), [lightArmor], 11, -1];
+instance Armor LeatherArmor["Leather Armor", 10.0, gp(10), [lightArmor], 11, -1];
+instance Armor StuddedLeather["Studded Leather", 13.0, gp(45), [lightArmor], 12, -1];
+instance Armor HideArmor["Hide Armor", 12.0, gp(10), [mediumArmor], 12, 2];
+instance Armor ChainShirt["Chain Shirt", 20.0, gp(50), [mediumArmor], 13, 2];
+instance Armor ScaleMail["Scale Mail", 45.0, gp(50), [mediumArmor], 14, 2];
+instance Armor Breastplate["Breastplate", 20.0, gp(400), [mediumArmor], 14, 2];
+instance Armor HalfPlate["Half Plate", 40.0, gp(750), [mediumArmor], 15, 2];
+instance Armor RingMail["Ring Mail", 40.0, gp(30), [heavyArmor], 14, 0];
+instance Armor ChainMail["Chain Mail", 55.0, gp(75), [heavyArmor], 16, 0];
+instance Armor Splint["Splint", 60.0, gp(200), [heavyArmor], 17, 0];
+instance Armor Plate["Plate", 65.0, gp(1500), [heavyArmor], 18, 0];
+
+// Misc Item Traits
+instance ItemTrait AlchemistFireTrait[
+  "Alchemist's Fire (Trait)", 
+  "A creature hit by the Alchemist's Fire takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames."
+];
+
+instance ItemTrait ArcaneFocusTrait[
+  "Arcane Focus (Trait)",
+  "An arcane focus is a special item - an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item - designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+];
+
+instance ItemTrait AntitoxinTrait[
+  "Antitoxin (Trait)",
+  "A creature that drinks this vial of liquid gains advantage on saving throws agains poison for 1 hour. It confers no benefit to undead or constructs."
+];
+
+instance ItemTrait BlockAndTackleTrait[
+  "Block and tackle (Trait)",
+  "A block and tackle allows you to hoist up to four times the weight you can normally lift."
+];
+
+instance ItemTrait CandleTrait[
+  "Candle (Trait)",
+  "When lit, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 foot, for 1 hour."
+];
+
+instance ItemTrait ChainTrait[
+  "Chain (Trait)",
+  "A chain has 10 HP. It can be burst with a successful DC 20 Strength check."
+];
+
+instance ItemTrait ComponentPouchTrait[
+  "Component Pouch (Trait)",
+  "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those compoents that have a specific cost."
+];
+
+instance ItemTrait CrowbarTrait[
+  "Crowbar (Trait)",
+  "Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied."
+];
+
+instance ItemTrait DruidicFocusTrait[
+  "Druidic Focus (Trait)",
+  "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus."
+];
+
+instance ItemTrait HealersKitTrait[
+  "Healer's Kit (Trait)",
+  "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check."
+];
+
+instance ItemTrait HolySymbolTrait[
+  "Holy Symbol (Trait)",
+  "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield."
+];
+
+instance ItemTrait HolyWaterTrait[
+  "Holy Water (Trait)",
+  "As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon. If the target is a fiend or undead, it takes 2d6 radiant damage. 
+A cleric or paladin may create holy water by performing a special ritual. The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot."
+];
+
+instance ItemTrait HuntingTrapTrait[
+  "Hunting Trap (Trait)",
+  "When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature."
+];
+
+instance ItemTrait LampTrait[
+  "Lamp (Trait)",
+  "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."
+];
+
+instance ItemTrait BullseyeLanternTrait[
+  "Lantern, Bullseye (Trait)",
+  "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."
+];
+
+instance ItemTrait HoodedLanternTrait[
+  "Lantern, Hooded (Trait)",
+  "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-­foot radius."
+];
+
+instance ItemTrait LockTrait[
+  "Lock (Trait)",
+  "A key is provided with the lock. Without the key, a creature proficient with thieves’ tools can pick this lock with a successful DC 15 Dexterity check."
+];
+
+instance ItemTrait ManaclesTrait[
+  "Manacles (Trait)",
+  "These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves’ tools can pick the manacles’ lock with a successful DC 15 Dexterity check. Manacles have 15 hit points."
+];
+
+instance ItemTrait BasicPoisonTrait[
+  "Poison, Basic (Trait)",
+  "You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying."
+];
+
+instance ItemTrait PotionofHealingTrait[
+  "Potion of Healing (Trait)",
+  "A character who drinks the magical red fluid in this vial regains 2d4 + 2 hit points. Drinking or administering a potion takes an action."
+];
+
+instance ItemTrait PortableRamTrait[
+  "Ram, Portable (Trait)",
+  "You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check."
+];
+
+instance ItemTrait RopeTrait[
+  "Rope (Trait)",
+  "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check"
+];
+
+instance ItemTrait TorchTrait[
+  "Torch (Trait)",
+  "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet."
+];
+
+// Misc Items
+instance Item Abacus["Abacus", 2.0, [], gp(2), [], []];
+instance Item AcidVial["Acid (vial)", 1.0, [
+  rangedWeaponAction("Acid (vial)", [improvisedWeapon], .Dexterity, 20, 20, [2d6, .Acid], [])
+], gp(25), [improvisedWeapon], []];
+instance Item AlchemistFire["Alchemist's Fire (Flask)", 1.0, [
+  rangedWeaponAction("Alchemist's Fire (Flask)", [improvisedWeapon], .Dexterity, 20, 20, [1d4, .Fire], [])
+], gp(50), [improvisedWeapon], [.AlchemistFireTrait]];
+
+instance Item Arrow["Arrow (x20)", 1.0, [], gp(1), [], []];
+instance Item BlowgunNeedle["Blowgun Needle (x50)", 1.0, [], gp(1), [], []];
+instance Item CrossbowBolt["Crossbow Bolt (x20)", 1.5, [], gp(1), [], []];
+instance Item SlingBullet["Sling Bullet (x20)", 1.5, [], cp(4), [], []];
+instance Item Antitoxin["Antitoxin (vial)", 0.0, [], gp(50), [], [.AntitoxinTrait]];
+instance Item ArcaneFocus_Crystal["Arcane Focus (Crystal)", 1.0, [], gp(10), [], [.ArcaneFocusTrait]];
+instance Item ArcaneFocus_Orb["Arcane Focus (Orb)", 1.0, [], gp(10), [], [.ArcaneFocusTrait]];
+instance Item ArcaneFocus_Rod["Arcane Focus (Rod)", 1.0, [], gp(10), [], [.ArcaneFocusTrait]];
+instance Item ArcaneFocus_Staff["Arcane Focus (Staff)", 1.0, [], gp(10), [], [.ArcaneFocusTrait]];
+instance Item ArcaneFocus_Wand["Arcane Focus (Wand)", 1.0, [], gp(10), [], [.ArcaneFocusTrait]];
+instance Item Backpack["Backpack", 5.0, [], gp(2), [], []];
+instance Item BallBearings["Ball Bearings (bag of 1000)", 2.0, [
+  // TODO: special action kind for these
+], gp(1), [], []];
+instance Item Barrel["Barrel", 70.0, [], gp(2), [], []];
+instance Item Basket["Basket", 2.0, [], sp(4), [], []];
+instance Item Bedroll["Bedroll", 7.0, [], gp(1), [], []];
+instance Item Bell["Bell", 0.0, [], gp(1), [], []];
+instance Item Blanket["Blanket", 3.0, [], sp(5), [], []];
+instance Item BlockAndTackle["Block and tackle", 5.0, [], gp(1), [], [.BlockAndTackleTrait]];
+instance Item Book["Book", 5.0, [], gp(25), [], []];
+instance Item GlassBottle["Bottle, glass", 2.0, [], gp(2), [], []];
+instance Item Bucket["Bucket", 2.0, [], cp(5), [], []];
+instance Item Caltrops["Caltrops (bag of 20)", 2.0, [
+  // TODO: special action kind for these
+], gp(1), [], []];
+instance Item Candle["Candle", 0.0, [], gp(1), [], [.CandleTrait]];
+instance Item CaseCrossbow["Case (Crossbow Bolts)", 1.0, [], gp(1), [], []];
+instance Item CaseMapScroll["Case (Map or Scroll)", 1.0, [], gp(1), [], []];
+instance Item Cahin["Chain (10 feet)", 10.0, [], gp(5), [], [.ChainTrait]];
+instance Item Chalk["Chalk (1 piece)", 0.0, [], cp(1), [], []];
+instance Item Chest["Chest", 25.0, [], gp(5), [], []];
+instance Item ClimbersKit["Climber's Kit", 12.0, [], gp(25), [], []];
+instance Item ClothesCommon["Clothes, Common", 3.0, [], sp(5), [], []];
+instance Item ClothesCostume["Clothes, Costume", 4.0, [], gp(5), [], []];
+instance Item ClothesFine["Clothes, Fine", 6.0, [], gp(15), [], []];
+instance Item ClothesTravelers["Clothes, Traveler's", 4.0, [], gp(2), [], []];
+instance Item ComponentPouch["Component Pouch", 2.0, [], gp(25), [], [.ComponentPouchTrait]];
+instance Item Crowbar["Crowbar", 5.0, [], gp(2), [], [.CrowbarTrait]];
+instance Item DruidicFocus_SprigofMistletoe["Druidic Focus (Sprig of Mistletoe)", 0.0, [], gp(1), [], []];
+instance Item DruidicFocus_Totem["Druidic Focus (Totem)", 0.0, [], gp(1), [], []];
+instance Item DruidicFocus_WoodenStaff["Druidic Focus (Wooden Staff)", 4.0, [], gp(5), [], []];
+instance Item DruidicFocus_YewWand["Druidic Focus (Yew Wand)", 1.0, [], gp(10), [], []];
+instance Item FishingTackle["Fishing tackle", 4.0, [], gp(1), [], []];
+instance Item Flask["Flask", 1.0, [], cp(2), [], []];
+instance Item Tankard["Tankard", 1.0, [], cp(2), [], []];
+instance Item GrapplingHook["Grappling hook", 4.0, [], gp(2), [], []];
+instance Item Hammer["Hammer", 3.0, [], gp(1), [], []];
+instance Item HammerSledge["Hammer, sledge", 10.0, [], gp(2), [], []];
+instance Item HealersKit["Healer’s kit", 3.0, [], gp(5), [], [.HealersKitTrait]];
+instance Item HolyWater["Holy water (flask)", 1.0, [], gp(25), [], [.HolyWaterTrait]];
+instance Item HolySymbol_Amulet["Holy Symbol (Amulet)", 1.0, [], gp(5), [], [.HolySymbolTrait]];
+instance Item HolySymbol_Emblem["Holy Symbol (Emblem)", 0.0, [], gp(5), [], [.HolySymbolTrait]];
+instance Item HolySymbol_Reliquary["Holy Symbol (Reliquary)", 2.0, [], gp(5), [], [.HolySymbolTrait]];
+instance Item Hourglass["Hourglass", 1.0, [], gp(25), [], []];
+instance Item HuntingTrap["Hunting trap", 25.0, [], gp(5), [], [.HuntingTrapTrait]];
+instance Item Ink["Ink (1 ounce bottle)", 0.0, [], gp(10), [], []];
+instance Item InkPen["Ink pen", 0.0, [], cp(2), [], []];
+instance Item Jug["Jug", 4.0, [], cp(2), [], []];
+instance Item Pitcher["Pitcher", 4.0, [], cp(2), [], []];
+instance Item Ladder["Ladder (10-foot)", 25.0, [], sp(1), [], []];
+instance Item Lamp["Lamp", 1.0, [], sp(5), [], [.LampTrait]];
+instance Item LanternBullseye["Lantern, bullseye", 2.0, [], gp(10), [], [.BullseyeLanternTrait]];
+instance Item LanternHooded["Lantern, hooded", 2.0, [], gp(5), [], [.HoodedLanternTrait]];
+instance Item Lock["Lock", 1.0, [], gp(10), [], [.LockTrait]];
+instance Item MagnifyingGlass["Magnifying glass", 0.0, [], gp(100), [], []];
+instance Item Manacles["Manacles", 6.0, [], gp(2), [], [.ManaclesTrait]];
+instance Item MessKit["Mess kit", 1.0, [], sp(2), [], []];
+instance Item MirrorSteel["Mirror, steel", 0.5, [], gp(5), [], []];
+instance Item Oil["Oil (flask)", 1.0, [], sp(1), [], []];
+instance Item Paper["Paper (one sheet)", 0.0, [], sp(2), [], []];
+instance Item Parchment["Parchment (one sheet)", 0.0, [], sp(1), [], []];
+instance Item Perfume["Perfume (vial)", 0.0, [], gp(5), [], []];
+instance Item PickMiners["Pick, miner’s", 10.0, [], gp(2), [], []];
+instance Item Piton["Piton", 0.25, [], cp(5), [], []];
+instance Item PoisonBasic["Poison, basic (vial)", 0.0, [], gp(100), [], [.BasicPoisonTrait]];
+instance Item Pole["Pole (10-foot)", 7.0, [], cp(5), [], []];
+instance Item PotIron["Pot, iron", 10.0, [], gp(2), [], []];
+instance Item PotionofHealing["Potion of healing", 0.5, [], gp(50), [], [.PotionofHealingTrait]];
+instance Item Pouch["Pouch", 1.0, [], sp(5), [], []];
+instance Item Quiver["Quiver", 1.0, [], gp(1), [], []];
+instance Item RamPortabe["Ram, portable", 35.0, [], gp(4), [], [.PortableRamTrait]];
+instance Item Rations["Rations (1 day)", 2.0, [], sp(5), [], []];
+instance Item Robes["Robes", 4.0, [], gp(1), [], []];
+instance Item RopeHemp["Rope, hempen (50 feet)", 10.0, [], gp(1), [], [.RopeTrait]];
+instance Item RopeSilk["Rope, silk (50 feet)", 5.0, [], gp(10), [], [.RopeTrait]];
+instance Item Sack["Sack", 0.5, [], cp(1), [], []];
+instance Item ScaleMerchants["Scale, merchant’s", 3.0, [], gp(5), [], []];
+instance Item SealingWax["Sealing wax", 0.0, [], sp(5), [], []];
+instance Item Shovel["Shovel", 5.0, [], gp(2), [], []];
+instance Item SignalWhistle["Signal whistle", 0.0, [], cp(5), [], []];
+instance Item SignetRing["Signet ring", 0.0, [], gp(5), [], []];
+instance Item Soup["Soap", 0.0, [], cp(2), [], []];
+instance Item Spellbook["Spellbook", 3.0, [], gp(50), [], []];
+instance Item Spikes["Spikes, iron (10)", 5.0, [], gp(1), [], []];
+instance Item Spyglass["Spyglass", 1.0, [], gp(1000), [], []];
+instance Item Tent["Tent, two-person", 20.0, [], gp(2), [], []];
+instance Item Tinderbox["Tinderbox", 1.0, [], sp(5), [], []];
+instance Item Torch["Torch", 1.0, [], cp(1), [], [.TorchTrait]];
+instance Item Vial["Vial", 0.0, [], gp(1), [], []];
+instance Item Waterskin["Waterskin", 5.0, [], sp(2), [], []];
+instance Item Whetstone["Whetstone", 1.0, [], cp(1), [], []];
+
+// Equipment Packs - these don't work yet due to ordering
+// global burglarsPack = [
+//   .Backpack, .BallBearings, .Bell, .Candle, .Candle, .Candle, .Candle, .Candle, 
+//   .Crowbar, .Hammer, .Piton, .Piton, .Piton, .Piton, .Piton, .Piton, .Piton, 
+//   .Piton, .Piton, .Piton, .LanternHooded, .Oil, .Oil, .Rations, .Rations, 
+//   .Rations, .Rations, .Rations, .Tinderbox, .Waterskin, .RopeHemp // todo: string
+// ];
+// 
+// global diplomatsPack = [
+//   .Chest, .CaseMapScroll, .CaseMapScroll, .ClothesFine, .Ink, .InkPen, .Lamp,
+//   .Oil, .Oil, .Paper, .Paper, .Paper, .Paper, .Paper, .Perfume, .SealingWax, 
+//   .Soap
+// ];
+// 
+// global dungeoneersPack = [
+//   .Backpack, .Crowbar, .Hammer, .Piton, .Piton, .Piton, .Piton, .Piton, .Piton, 
+//   .Piton, .Piton, .Piton, .Piton, .Torch, .Torch, .Torch, .Torch, .Torch, 
+//   .Torch, .Torch, .Torch, .Torch, .Torch, .Tinderbox, .Rations, .Rations, 
+//   .Rations, .Rations, .Rations, .Rations, .Rations, .Rations, .Rations, 
+//   .Rations, .Waterskin, .RopeHemp
+// ];
+// 
+// global entertainersPack = [
+//   .Backpack, .Bedroll, .ClothesCostume, .ClothesCostume, .Candle, .Candle, 
+//   .Candle, .Candle, .Candle, .Rations, .Rations, .Rations, .Rations, .Rations,
+//   .Waterskin, .DisguiseKit
+// ];
+// 
+// global explorersPack = [
+//   .Backpack, .Bedroll, .MessKit, .Tinderbox, .Torch, .Torch, .Torch, .Torch, 
+//   .Torch, .Torch, .Torch, .Torch, .Torch, .Torch, .Rations, .Rations, .Rations, 
+//   .Rations, .Rations, .Rations, .Rations, .Rations, .Rations, .Rations, 
+//   .Waterskin, .RopeHemp
+// ];
+// 
+// global priestsPack = [
+//   .Backpack, .Blanket, .Candle, .Candle, .Candle, .Candle, .Candle, .Candle, 
+//   .Candle, .Candle, .Candle, .Candle, .Tinderbox, // todo: alms box, incense, censer, vestments
+//   .Rations, .Rations, .Waterskin
+// ];
+// 
+// global scholarsPack = [
+//   .Backpack, .Book, .Ink, .InkPen, .Parchment, .Parchment, .Parchment, 
+//   .Parchment, .Parchment, .Parchment, .Parchment, .Parchment, .Parchment, 
+//   .Parchment // todo: bag of sand, small knife
+// ];
+
+// Tools
+instance Item AlchemistsSupplies["Alchemist’s supplies", 8.0, [], gp(50), [], []];
+instance Item BrewersSupplies["Brewer’s supplies", 9.0, [], gp(20), [], []];
+instance Item CalligraphersSupplies["Calligrapher's supplies", 5.0, [], gp(10), [], []];
+instance Item CarpenterTools["Carpenter’s tools", 6.0, [], gp(8), [], []];
+instance Item CartographerTools["Cartographer’s tools", 6.0, [], gp(15), [], []];
+instance Item CobblerTools["Cobbler’s tools", 5.0, [], gp(5), [], []];
+instance Item CookTtensils["Cook’s utensils", 8.0, [], gp(1), [], []];
+instance Item GlassblowerTools["Glassblower’s tools", 5.0, [], gp(30), [], []];
+instance Item JewelerTools["Jeweler’s tools", 2.0, [], gp(25), [], []];
+instance Item LeatherworkerTools["Leatherworker’s tools", 5.0, [], gp(5), [], []];
+instance Item MasonTools["Mason’s tools", 8.0, [], gp(10), [], []];
+instance Item PainterTupplies["Painter’s supplies", 5.0, [], gp(10), [], []];
+instance Item PotterTools["Potter’s tools", 3.0, [], gp(10), [], []];
+instance Item SmithTools["Smith’s tools", 8.0, [], gp(20), [], []];
+instance Item TinkerTools["Tinker’s tools", 10.0, [], gp(50), [], []];
+instance Item WeaverTools["Weaver’s tools", 5.0, [], gp(1), [], []];
+instance Item WoodcarverTools["Woodcarver’s tools", 5.0, [], gp(1), [], []];
+instance Item DisguiseKit["Disguise kit", 3.0, [], gp(25), [], []];
+instance Item ForgeryKit["Forgery kit", 5.0, [], gp(15), [], []];
+instance Item DiceSet["Dice set", 0.0, [], sp(1), [], []];
+instance Item PlayingCardSet["Playing card set", 0.0, [], sp(5), [], []];
+instance Item HerbalismKit["Herbalism kit", 3.0, [], gp(5), [], []];
+instance Item Bagpipes["Bagpipes", 6.0, [], gp(30), [], []];
+instance Item Drum["Drum", 3.0, [], gp(6), [], []];
+instance Item Dulcimer["Dulcimer", 10.0, [], gp(25), [], []];
+instance Item Flute["Flute", 1.0, [], gp(2), [], []];
+instance Item Lute["Lute", 2.0, [], gp(35), [], []];
+instance Item Lyre["Lyre", 2.0, [], gp(30), [], []];
+instance Item Horn["Horn", 2.0, [], gp(3), [], []];
+instance Item PanFlute["Pan flute", 2.0, [], gp(12), [], []];
+instance Item Shawm["Shawm", 1.0, [], gp(2), [], []];
+instance Item Viol["Viol", 1.0, [], gp(30), [], []];
+instance Item NavigatorTools["Navigator’s tools", 2.0, [], gp(25), [], []];
+instance Item PoisonersKit["Poisoner’s kit", 2.0, [], gp(50), [], []];
+instance Item ThievesTools["Thieves’ tools", 1.0, [], gp(25), [], []];

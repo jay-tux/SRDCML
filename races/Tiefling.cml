@@ -1,0 +1,52 @@
+data Trait Tiefling_InfernalLegacy {
+    field name = "Infernal Legacy";
+    field descPt1 = "You know the thaumaturgy cantrip. ";
+    field descPt2 = "Charisma is your spellcasting ability for these spells.";
+    field descAdd1 = "You can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. ";
+    field descAdd2 = "You can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. ";
+    
+    field desc = appendStr(descPt1, descPt2);
+    
+    fun onRestore(choices, level) {
+      var parent = .Yuanti_Pureblood;
+      addSpell(.Thaumaturgy, .Charisma, parent.name);
+      if(level >= 3) { onLevelUp(3); }
+      if(level >= 5) { onLevelUp(5); }
+    }
+    
+    fun onLevelUp(level) {
+      var parent = .Tiefling;
+      if(level == 3) {
+        addSpell(.HellishRebuke, .Charisma, parent.name); // somehow indicate charges
+        desc = appendStr(descPt1, descAdd1, descPt2);
+      }
+      
+      if(level == 5) {
+        addSpell(.Darkness, .Charisma, parent.name); // somehow indicate charges
+        desc = appendStr(descPt1, descAdd1, descAdd2, descPt2);
+      }
+    }
+}
+
+instance Trait Tiefling_HellishResistance[
+    "Hellish Resistance",
+    "You have resistance to fire damage."
+];
+
+data Race Tiefling {
+    field name = "Tiefling";
+    field traits = [ .Darkvision60, .Tiefling_InfernalLegacy, .Tiefling_HellishResistance ];
+    field languages = [ .Common, .Infernal ];
+    field speed = 30;
+
+    fun onSelect() {
+        abilityIncrease(.Charisma, 2);
+        abilityIncrease(.Intelligence, 1);
+        onRestore({}, 1);
+    }
+
+    fun onRestore(choices, level) {
+        addRacialTraits(traits);
+        addLanguages(languages);
+    }
+}

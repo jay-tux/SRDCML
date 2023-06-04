@@ -1,0 +1,18 @@
+data Race Human {
+  field name = "Human";
+  field traits = [];
+  field speed = 30;
+  
+  fun onLevelUp(level) {}
+  
+  fun onSelect() {
+    for(a in getAbilities()) {
+      abilityIncrease(a, 1);
+    }
+    onRestore({ "language" = chooseDataByKind("language", "Language") }, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    addLanguages([ .Common, choices["language"] ]);
+  }
+}

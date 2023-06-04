@@ -1,0 +1,79 @@
+instance Trait Dwarf_DwarvenResilience[
+    "Dwarven Resilience",
+    "You have advantage on saving throws against poison, and you have resistance against poison damage."
+];
+
+instance Trait Dwarf_DwarvenCombatTraining[
+    "Dwarven Combat Training",
+    "You have proficiency with the battleaxe, handaxe, throwing hammer, and warhammer."
+];
+
+template DwarfProf as Trait[kind] {
+    field name = appendStr("Tool Proficiency (", <kind>, ")");
+    field desc = appendStr("You gain proficiency with ", <kind>, ".");
+    
+    fun onRestore(choices, level) {
+        addItemProficiencies([<kind>]);
+    }
+}
+
+instance DwarfProf Dwarf_ToolProficiency_SmithTools["Smith's Tools"];
+instance DwarfProf Dwarf_ToolProficiency_BrewerSupplies["Brewer's Supplies"];
+instance DwarfProf Dwarf_ToolProficiency_MasonTools["Mason's Tools"];
+
+instance Trait Dwarf_Stonecunning[
+    "Stonecunning",
+    "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+];
+
+instance Trait HillDwarf_DwarvenToughness[
+    "Dwarven Toughness",
+    "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+];
+
+data Subrace_Dwarf HillDwarf {
+    field name = "Hill Dwarf";
+    field traits = [.HillDwarf_DwarvenToughness];
+    field languages = [];
+
+    fun onLevelUp(level) { addMaxHP(1); }
+    fun onSelect() {
+        abilityIncrease(.Wisdom, 1);
+        addMaxHP(1);
+    }
+
+    fun onRestore(choices, level) {
+        addRacialTraits(traits);
+    }
+}
+
+data Race Dwarf {
+    field name = "Dwarf";
+    field traits = [.Darkvision60, .Dwarf_DwarvenResilience, .Dwarf_DwarvenCombatTraining, .Dwarf_Stonecunning];
+    field languages = [ .Common, .Dwarvish ];
+    field subrace = 0; // reassign on create
+    field speed = 25;
+
+    fun onLevelUp(level) {
+        subrace.onLevelUp(level);
+    }
+
+    fun onSelect() {
+        abilityIncrease(.Constitution, 2);
+
+        subrace = chooseDataByKind("subrace", "Subrace_Dwarf");
+        subrace.onSelect();
+        var prof = chooseFrom("prof", [.Dwarf_ToolProficiency_SmithTools, .Dwarf_ToolProficiency_BrewerSupplies, .Dwarf_ToolProficiency_MasonTools]);
+        
+        onRestore({ "subrace" = subrace, "prof" = prof}, 1);
+    }
+
+    fun onRestore(choices, level) {
+        var subrace = choices["subrace"];
+        name = subrace.name;
+        addRacialTraits(traits);
+        addRacialTraits([choices["prof"]]);
+        addLanguages(languages);
+        subrace.onRestore(choices, level);
+    }
+}

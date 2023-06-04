@@ -1,0 +1,87 @@
+data Trait Dragonborn_BreathWeapon {
+  field name = "Breath Weapon";
+  field desc = "You can use your action to exhale destructive energy.";
+  field action = 0;
+    
+  fun onRestore(choices, level) {
+    var ancestry = choices["ancestry"];
+    name = appendStr(name, " (", ancestry.dragon, " Dragon)");
+    action = AOESpellAction(name, [], "Self", ancestry.save, [[2d6, ancestry.damage]], ancestry.aoe);
+    addDCAction(action, .Constitution);
+  }
+  
+  // TODO: single charge, short/long rest = recharge, level up
+}
+
+data Trait Dragonborn_DamageResistance {
+  field name = "Damage Resistance";
+  field desc = "You have resistance to a damage type dependent on your draconic ancestry.";
+  
+  fun onRestore(choices, level) {
+    var ancestry = choices["ancestry"];
+    desc = appendStr("You have resistance to ", ancestry.damage.name, " damage.");
+  }
+}
+
+template Dragonborn_DraconicAncestry[dragon, damage, aoe, save] {
+  field name = appendStr(<dragon>, " dragon");
+  field dragon = <dragon>;
+  field damage = <damage>;
+  field aoe = <aoe>;
+  field save = <save>;
+}
+
+instance Dragonborn_DraconicAncestry DB_DA_Black[
+  "Black", .Acid, "5 by 30 ft. line", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Blue[
+  "Blue", .Lightning, "5 by 30 ft. line", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Brass[
+  "Brass", .Fire, "5 by 30 ft. line", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Bronze[
+  "Bronze", .Lightning, "5 by 30 ft. line", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Copper[
+  "Copper", .Acid, "5 by 30 ft. line", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Gold[
+  "Gold", .Fire, "15 ft. cone", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Green[
+  "Green", .Poison, "15 ft. cone", .Constitution
+];
+instance Dragonborn_DraconicAncestry DB_DA_Red[
+  "Red", .Fire, "15 ft. cone", .Dexterity
+];
+instance Dragonborn_DraconicAncestry DB_DA_Silver[
+  "Silver", .Cold, "15 ft. cone", .Constitution
+];
+instance Dragonborn_DraconicAncestry DB_DA_White[
+  "White", .Cold, "15 ft. cone", .Constitution
+];
+
+data Race Dragonborn {
+  field name = "Dragonborn";
+  field traits = [ .Dragonborn_BreathWeapon, .Dragonborn_DamageResistance ];
+  field languages = [ .Common, .Draconic ];
+  field ancestry = 0;
+  field speed = 30;
+  
+  fun onLevelUp(level) {}
+  
+  fun onSelect() {
+    abilityIncrease(.Strength, 2);
+    abilityIncrease(.Charisma, 1);
+    
+    ancestry = chooseDataByKind("ancestry", "Dragonborn_DraconicAncestry");
+    onRestore({ "ancestry" = ancestry }, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    ancestry = choices["ancestry"];
+    addRacialTraits(traits);
+    addLanguages(languages);
+  }
+}

@@ -1,0 +1,327 @@
+// Abilities
+template Ability[ab, name]{ 
+    field abbrev = <ab>; 
+    field name = <name>;
+}
+instance Ability Strength["STR", "Strength"];
+instance Ability Dexterity["DEX", "Dexterity"];
+instance Ability Constitution["CON", "Constitution"];
+instance Ability Intelligence["INT", "Intelligence"];
+instance Ability Wisdom["WIS", "Wisdom"];
+instance Ability Charisma["CHA", "Charisma"];
+
+// Skills
+template Skill[sk, ab] {
+    field name = <sk>;
+    field reliesOn = <ab>;
+
+    fun getMod(hasProf) {
+        var base = getAbilityMod(<ab>);
+        if(hasProf) { base = base + getProficiency(); }
+        return base;
+    }
+}
+instance Skill Acrobatics["Acrobatics", .Dexterity];
+instance Skill AnimalHandling["Animal Handling", .Wisdom];
+instance Skill Arcana["Arcana", .Intelligence];
+instance Skill Athletics["Athletics", .Strength];
+instance Skill Deception["Deception", .Charisma];
+instance Skill History["History", .Intelligence];
+instance Skill Insight["Insight", .Wisdom];
+instance Skill Intimidation["Intimidation", .Charisma];
+instance Skill Investigation["Investigation", .Intelligence];
+instance Skill Medicine["Medicine", .Wisdom];
+instance Skill Nature["Nature", .Intelligence];
+instance Skill Perception["Perception", .Wisdom];
+instance Skill Performance["Performance", .Charisma];
+instance Skill Persuasion["Persuasion", .Charisma];
+instance Skill Religion["Religion", .Intelligence];
+instance Skill SleightOfHand["Sleight of Hand", .Dexterity];
+instance Skill Stealth["Stealth", .Dexterity];
+instance Skill Survival["Survival", .Wisdom];
+
+// Sizes
+template Size[ft] {
+    field size = <ft>;
+}
+instance Size Tiny[3];
+instance Size Small[5];
+instance Size Medium[5];
+instance Size Large[10];
+instance Size Huge[15];
+instance Size Gargantuan[20];
+
+// Damage Types
+template DamageType[name] { field name = <name>; }
+instance DamageType Acid["acid"];
+instance DamageType Bludgeoning["bludgeoning"];
+instance DamageType Cold["cold"];
+instance DamageType Fire["fire"];
+instance DamageType Force["force"];
+instance DamageType Lightning["lightning"];
+instance DamageType Necrotic["necrotic"];
+instance DamageType Piercing["piercing"];
+instance DamageType Poison["poison"];
+instance DamageType Psychic["psychic"];
+instance DamageType Radiant["radiant"];
+instance DamageType Slashing["slashing"];
+instance DamageType Thunder["thunder"];
+
+// Languages
+template Language[name, isExotic] { field name = <name>; field isExotic = <isExotic>; }
+instance Language Common["Common", false];
+instance Language Dwarvish["Dwarvish", false];
+instance Language Elvish["Elvish", false];
+instance Language L_Giant["Giant", false];
+instance Language Gnomish["Gnomish", false];
+instance Language L_Goblin["Goblin", false];
+instance Language L_Halfling["Halfling", false];
+instance Language L_Orc["Orc", false];
+instance Language Abyssal["Abyssal", true];
+instance Language Celestial["Celestial", true];
+instance Language Draconic["Draconic", true];
+instance Language DeepSpeech["Deep Speech", true];
+instance Language Infernal["Infernal", true];
+instance Language Primordial["Primordial", true];
+instance Language Sylvan["Sylvan", true];
+instance Language Undercommon["Undercommon", true];
+
+instance Language Telepathy30["Telepathy (30 ft.)", true];
+
+// Traits
+template Trait[name, desc] {
+    field name = <name>;
+    field desc = <desc>;
+}
+
+template LevelUpTrait[name, desc] {
+    field name = <name>;
+    field desc = <desc>;
+
+    fun onLevelUp(level) {}
+}
+
+instance Trait Darkvision60[
+    "Darkvision (60 ft)", 
+    "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
+];
+
+
+data LevelUpTrait ASI {
+    field name = "Ability Score Improvement";
+    field desc = "You can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.";
+    field levels = [4, 8, 12, 16, 19];
+    
+    fun onLevelUp(level) {
+      if(inList(levels, level)) {
+        var up = chooseDataByKind("__ASI", "Ability");
+        abilityIncrease(up, 1);
+        up = chooseDataByKind("__ASI", "Ability");
+        abilityIncrease(up, 1);
+      }
+    }
+}
+
+// Currency
+template Currency[name, abbrev, cpRatio] {
+  field name = <name>;
+  field amount = 0;
+  field abbrev = <abbrev>;
+  field conversionRatio = <cpRatio>;
+}
+
+instance Currency CP["Copper Piece", "CP", 1];
+instance Currency SP["Silver Piece", "SP", 10];
+instance Currency EP["Electrum Piece", "EP", 50];
+instance Currency GP["Gold Piece", "GP", 100];
+instance Currency PP["Platinum Piece", "PP", 1000];
+
+fun cp(count) { var res = .CP; res.amount = count; return res; }
+fun sp(count) { var res = .SP; res.amount = count; return res; }
+fun ep(count) { var res = .EP; res.amount = count; return res; }
+fun gp(count) { var res = .GP; res.amount = count; return res; }
+fun pp(count) { var res = .PP; res.amount = count; return res; }
+
+// Actions
+data Action HitAction {
+  field name = "";
+  field tags = [];
+  field baseAction = []; // kind, stat, range/reach, target desc, primary damage type, additional damage types 
+}
+
+data Action SpellHitAction {
+  field name = "";
+  field tags = [];
+  field baseAction = []; // kind, range/reach, target desc, damage types, add modifier to damage
+}
+
+data Action SpellDCAction {
+  field name = "";
+  field tags = [];
+  field baseAction = []; // kind, range/reach, target desc, save kind, damage types
+}
+
+fun meleeWeaponAction(name, tags, stat, reach, damage, addedDamage) {
+  var res = .HitAction;
+  res.name = name;
+  res.tags = appendList(tags, trim(split(name, "(")[0]));
+  res.baseAction = [ "Melee Weapon Attack", stat, appendStr(reach, " ft. (reach)"), "one target", damage, addedDamage ];
+  return res;
+}
+
+fun rangedWeaponAction(name, tags, stat, short, long, damage, addedDamage) {
+  var res = .HitAction;
+  res.name = name;
+  res.tags = appendList(tags, trim(split(name, "(")[0]));
+  res.baseAction = [ "Ranged Weapon Attack", stat, appendStr(short, "/", long, " ft."), "one target", damage, addedDamage ];
+  return res;
+}
+
+fun altSpellAction(name, tags, range) {
+  var res = .SpellHitAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Spell Action", appendStr(range), "", [], false ];
+  return res;
+}
+
+fun meleeSpellAction(name, tags, reach, damages) {
+  var res = .SpellHitAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Melee Spell Attack", appendStr(reach), "one target", damages, false ];
+  return res;
+}
+
+fun rangedSpellAction(name, tags, range, damages) {
+  var res = .SpellHitAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Ranged Spell Attack", appendStr(range, " ft."), "one target", damages, false ];
+  return res;
+}
+
+fun rangedDcSpellAction(name, tags, range, stat, damages) {
+  var res = .SpellDCAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Spell Action", appendStr(range, " ft."), "one target", stat, damages ];
+  return res;
+}
+
+fun AOESpellAction(name, tags, range, stat, damages, targets) {
+  var res = .SpellDCAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Spell Action", isInt(range) ? appendStr(range, " ft.") : range, targets, stat, damages ];
+  return res;
+}
+
+// Items
+template Item[name, weight, actions, value, tags, traits] {
+  field name = <name>;
+  field value = <value>;
+  field weight = <weight>;
+  field actions = <actions>;
+  field additionalTraits = <traits>;
+  field tags = appendList(<tags>, trim(split(name, "(")[0]));
+}
+
+template Armor as Item[name, weight, value, tags, baseAC, dexCap] {
+  field name = <name>;
+  field value = <value>;
+  field weight = <weight>;
+  field actions = [];
+  field additionalTraits = [];
+  field tags = appendList(<tags>, trim(split(name, "(")[0]));
+  field baseAC = <baseAC>;
+  field dexCap = <dexCap>;
+  // todo: min strength & disadvantages
+  
+  fun onDon() {
+    var dexDelta = getAbilityMod(.Dexterity);
+    if(dexCap != (-1) && dexDelta > dexCap) { dexDelta = dexCap; }
+    setAC(baseAC + dexDelta);
+  }
+}
+
+// template EquipmentPack as Item[name, value, ]
+
+data Item Shield {
+  field name = "Shield";
+  field value = gp(10);
+  field weight = 6.0;
+  field actions = [];
+  field additionalTraits = [];
+  field tags = [name];
+  
+  fun onDon() {
+    modAC(2);
+  }
+}
+
+global simpleWeapon = "Simple Weapon";
+global martialWeapon = "Martial Weapon";
+global meleeWeapon = "Melee Weapon";
+global rangedWeapon = "Ranged Weapon";
+global improvisedWeapon = "Improvised Weapon";
+global lightArmor = "Light Armor";
+global mediumArmor = "Medium Armor";
+global heavyArmor = "Heavy Armor";
+global shield = "Shield";
+
+template ItemTrait[name, desc] { field name = <name>; field desc = <desc>; }
+
+instance ItemTrait Ammunition[
+  "Ammunition",
+  "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+  If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way."
+];
+instance ItemTrait Heavy[
+  "Heavy",
+  "Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it toa large for a Small creature to use effectively."
+];
+instance ItemTrait Light[
+  "Light",
+  "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons."
+];
+instance ItemTrait Loading[
+  "Loading",
+  "Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make."
+];
+instance ItemTrait TwoHanded[
+  "Two-Handed",
+  "This weapon requires two hands to use."
+];
+instance ItemTrait VersatileD8[
+  "Versatile",
+  "This weapon can be used with one or two hands. When you use two hands to make a melee attack with this weapon, you deal 1d8 damage instead of 1d6."
+];
+instance ItemTrait VersatileD10[
+  "Versatile",
+  "This weapon can be used with one or two hands. When you use two hands to make a melee attack with this weapon, you deal 1d10 damage instead of 1d8."
+];
+
+// Spells
+template SpellSchool[name] { field name = <name>; }
+instance SpellSchool Abjuration["Abjuration"];
+instance SpellSchool Conjuration["Conjuration"];
+instance SpellSchool Divination["Divination"];
+instance SpellSchool Enchantment["Enchantment"];
+instance SpellSchool Evocation["Evocation"];
+instance SpellSchool Illusion["Illusion"];
+instance SpellSchool Necromancy["Necromancy"];
+instance SpellSchool Transmutation["Transmutation"];
+
+template Spell[name, kind, level, time, range, components, duration, actions, classes, desc] {
+  field name = <name>;
+  field kind = <kind>;
+  field level = <level>;
+  field castingTime = <time>;
+  field range = <range>;
+  field components = <components>;
+  field duration = <duration>;
+  field actions = <actions>;
+  field desc = <desc>;
+  field onSpellLists = <classes>;
+}

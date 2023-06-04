@@ -1,0 +1,60 @@
+instance Trait Halfling_Lucky[
+  "Lucky",
+  "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
+];
+
+instance Trait Halfling_Brave[
+  "Brave",
+  "You have advantage on saving throws against being frightened."
+];
+
+instance Trait Halfling_HalflingNimbleness[
+  "Halfling Nimbleness",
+  "You can move through the space of any creature that is of a size larger than yours."
+];
+
+instance Trait LightfootHalfling_NaturallyStealthy[
+  "Naturally Stealthy",
+  "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you."
+];
+
+data Subrace_Halfling LightfootHalfling {
+  field name = "Lightfoot Halfling";
+  field traits = [ .LightfootHalfling_NaturallyStealthy ];
+  
+  fun onLevelUp(level) {}
+    
+  fun onSelect() {
+    abilityIncrease(.Charisma, 1);
+    onRestore({}, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    addRacialTraits(traits);
+  }
+}
+
+data Race Halfling {
+  field name = "Halfling";
+  field traits = [ .Halfling_Lucky, .Halfling_Brave, .Halfling_HalflingNimbleness ];
+  field languages = [ .Common, .L_Halfling ];
+  field subrace = 0;
+  field speed = 25;
+  
+  fun onLevelUp(level) { subrace.onLevelUp(level); }
+  
+  fun onSelect() {
+    abilityIncrease(.Dexterity, 2);
+    subrace = chooseDataByKind("subrace", "Subrace_Halfling");
+    subrace.onSelect();
+    onRestore({ "subrace" = subrace }, 1);
+  }
+  
+  fun onRestore(choices, level) {
+    subrace = choices["subrace"];
+    name = subrace.name;
+    addRacialTraits(traits);
+    addLanguages(languages);
+    subrace.onRestore(choices, level);
+  }
+}
