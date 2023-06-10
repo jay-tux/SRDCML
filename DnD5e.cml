@@ -106,7 +106,6 @@ instance Trait Darkvision60[
     "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
 ];
 
-
 data LevelUpTrait ASI {
     field name = "Ability Score Improvement";
     field desc = "You can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.";
@@ -120,6 +119,14 @@ data LevelUpTrait ASI {
         abilityIncrease(up, 1);
       }
     }
+}
+
+template SpellcastingTrait as LevelUpTrait[class, ability] {
+    field name = "Spellcasting";
+    field _ab = <ability>;
+    field desc = appendStr("You can cast spells using your spell slots. Your spellcasting ability for ", <class>, " spells is ", _ab.name, ".");
+    
+    fun onLongRest() { recoverSpellSlots(); }
 }
 
 // Currency
@@ -269,6 +276,8 @@ global lightArmor = "Light Armor";
 global mediumArmor = "Medium Armor";
 global heavyArmor = "Heavy Armor";
 global shield = "Shield";
+
+global musicalInstrument = "Musical Instrument";
 
 template ItemTrait[name, desc] { field name = <name>; field desc = <desc>; }
 

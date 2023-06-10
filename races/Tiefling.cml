@@ -6,9 +6,11 @@ data Trait Tiefling_InfernalLegacy {
     field descAdd2 = "You can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. ";
     
     field desc = appendStr(descPt1, descPt2);
+    field chargesHR = "Tiefling_HellishRebuke";
+    field chargesD = "Tiefling_Darkness";
     
     fun onRestore(choices, level) {
-      var parent = .Yuanti_Pureblood;
+      var parent = .Tiefling;
       addSpell(.Thaumaturgy, .Charisma, parent.name);
       if(level >= 3) { onLevelUp(3); }
       if(level >= 5) { onLevelUp(5); }
@@ -17,14 +19,21 @@ data Trait Tiefling_InfernalLegacy {
     fun onLevelUp(level) {
       var parent = .Tiefling;
       if(level == 3) {
-        addSpell(.HellishRebuke, .Charisma, parent.name); // somehow indicate charges
+        registerCharges(chargesHR, 1);
+        addSpellUsing(.HellishRebuke, .Charisma, parent.name, chargesHR, 1); // somehow indicate charges
         desc = appendStr(descPt1, descAdd1, descPt2);
       }
       
       if(level == 5) {
-        addSpell(.Darkness, .Charisma, parent.name); // somehow indicate charges
+        registerCharges(chargesD, 1);
+        addSpellUsing(.Darkness, .Charisma, parent.name, chargesD, 1); // somehow indicate charges
         desc = appendStr(descPt1, descAdd1, descAdd2, descPt2);
       }
+    }
+    
+    fun onLongRest() {
+      recoverCharges(chargesHR);
+      recoverCharges(chargesD);
     }
 }
 
