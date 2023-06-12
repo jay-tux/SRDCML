@@ -1,16 +1,26 @@
 data Trait Dragonborn_BreathWeapon {
   field name = "Breath Weapon";
-  field desc = "You can use your action to exhale destructive energy.";
+  field desc = "You can use your action to exhale destructive energy. You can use this once per short or long rest.";
   field action = 0;
+  field charges = "Dragonborn_BreathWeapon";
+  field ancestry = 0;
+    
+  fun onLevelUp(level) {
+    action.baseAction[4][0][0] = ((level - 1) / 5 + 2)d(6);
+  }
     
   fun onRestore(choices, level) {
-    var ancestry = choices["ancestry"];
+    registerCharges(charges, 1);
+    ancestry = choices["ancestry"];
     name = appendStr(name, " (", ancestry.dragon, " Dragon)");
     action = AOESpellAction(name, [], "Self", ancestry.save, [[2d6, ancestry.damage]], ancestry.aoe);
-    addDCAction(action, .Constitution);
+    onLevelUp(level);
+    addDCActionUsing(action, .Constitution, charges, 1);
   }
   
-  // TODO: single charge, short/long rest = recharge, level up
+  fun onAnyRest() {
+    recoverCharges(charges);
+  }
 }
 
 data Trait Dragonborn_DamageResistance {
@@ -79,7 +89,7 @@ data Race Dragonborn {
     onRestore({ "ancestry" = ancestry }, 1);
   }
   
-  fun onRestore(choices, level) {
+  fun onRestore(choices, level) {      
     ancestry = choices["ancestry"];
     addRacialTraits(traits);
     addLanguages(languages);
