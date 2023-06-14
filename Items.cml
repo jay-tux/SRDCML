@@ -1,14 +1,14 @@
 // Simple Melee Weapons
 instance Item Club["Club", 2.0, [
   meleeWeaponAction("Club", [simpleWeapon], .Strength, 5, [1d4, .Bludgeoning], [])
-], sp(1), [simpleWeapon, meleeWeapon], [.Light]];
+], sp(1), [simpleWeapon, meleeWeapon], [.Light_IT]];
 
 instance Item Dagger["Dagger", 1.0, [
   meleeWeaponAction("Dagger (STR) (melee)", [simpleWeapon], .Strength, 5, [1d4, .Piercing], []),
   meleeWeaponAction("Dagger (DEX) (melee)", [simpleWeapon], .Dexterity, 5, [1d4, .Piercing], []),
   rangedWeaponAction("Dagger (STR) (ranged)", [simpleWeapon], .Strength, 20, 60, [1d4, .Piercing], []),
   rangedWeaponAction("Dagger (DEX) (ranged)", [simpleWeapon], .Dexterity, 20, 60, [1d4, .Piercing], [])
-], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light_IT]];
 
 instance Item Greatclub["Greatclub", 10.0, [
   meleeWeaponAction("Greatclub", [simpleWeapon], .Strength, 5, [1d8, .Bludgeoning], [])
@@ -17,7 +17,7 @@ instance Item Greatclub["Greatclub", 10.0, [
 instance Item Handaxe["Handaxe", 2.0, [
   meleeWeaponAction("Handaxe (melee)", [simpleWeapon], .Strength, 5, [1d6, .Slashing], []),
   rangedWeaponAction("Handaxe (ranged)", [simpleWeapon], .Strength, 20, 60, [1d6, .Slashing], [])
-], gp(5), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+], gp(5), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light_IT]];
 
 instance Item Javelin["Javelin", 2.0, [
   meleeWeaponAction("Javelin (melee)", [simpleWeapon], .Strength, 5, [1d6, .Piercing], []),
@@ -27,7 +27,7 @@ instance Item Javelin["Javelin", 2.0, [
 instance Item LightHammer["Light Hammer", 2.0, [
   meleeWeaponAction("Light Hammer (melee)", [simpleWeapon], .Strength, 5, [1d4, .Bludgeoning], []),
   rangedWeaponAction("Light Hammer (ranged)", [simpleWeapon], .Strength, 30, 120, [1d4, .Bludgeoning], [])
-], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light]];
+], gp(2), [simpleWeapon, meleeWeapon, rangedWeapon], [.Light_IT]];
 
 instance Item Mace["Mace", 4.0, [
   meleeWeaponAction("Mace", [simpleWeapon], .Strength, 5, [1d6, .Bludgeoning], [])
@@ -122,7 +122,7 @@ instance Item Rapier["Rapier", 2.0, [
 instance Item Scimitar["Scimitar", 3.0, [
   meleeWeaponAction("Scimitar (STR)", [martialWeapon], .Strength, 5, [1d6, .Slashing], []),
   meleeWeaponAction("Scimitar (DEX)", [martialWeapon], .Dexterity, 5, [1d6, .Slashing], [])
-], gp(25), [martialWeapon, meleeWeapon], [.Light]];
+], gp(25), [martialWeapon, meleeWeapon], [.Light_IT]];
 
 instance Item Shortsword["Shortsword", 2.0, [
   meleeWeaponAction("Shortsword (STR)", [martialWeapon], .Strength, 5, [1d6, .Piercing], []),
@@ -157,7 +157,7 @@ instance Item Whip["Whip", 3.0, [
 
 instance Item HandCrossbow["Hand Crossbow", 3.0, [
   rangedWeaponAction("Hand Crossbow", [martialWeapon], .Dexterity, 30, 120, [1d6, .Piercing], [])
-], gp(75), [martialWeapon, rangedWeapon], [.Ammunition, .Loading, .Light]];
+], gp(75), [martialWeapon, rangedWeapon], [.Ammunition, .Loading, .Light_IT]];
 
 instance Item HeavyCrossbow["Heavy Crossbow", 18.0, [
   rangedWeaponAction("Heavy Crossbow", [martialWeapon], .Dexterity, 150, 400, [1d10, .Piercing], [])

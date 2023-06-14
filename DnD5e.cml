@@ -306,7 +306,7 @@ instance ItemTrait Heavy[
   "Heavy",
   "Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it toa large for a Small creature to use effectively."
 ];
-instance ItemTrait Light[
+instance ItemTrait Light_IT[
   "Light",
   "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons."
 ];
