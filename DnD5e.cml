@@ -349,4 +349,19 @@ template Spell[name, kind, level, time, range, components, duration, actions, cl
   field actions = <actions>;
   field desc = <desc>;
   field onSpellLists = <classes>;
+  field isRitual = false;
+}
+
+template Ritual as Spell[name, kind, level, time, range, components, duration, actions, classes, desc] {
+  field name = <name>;
+  field kind = <kind>;
+  field level = <level>;
+  field castingTime = <time>;
+  field range = <range>;
+  field components = <components>;
+  field duration = <duration>;
+  field actions = <actions>;
+  field desc = <desc>;
+  field onSpellLists = <classes>;
+  field isRitual = true;
 }
