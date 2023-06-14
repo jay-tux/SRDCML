@@ -345,7 +345,7 @@ At Higher Levels. When you cast this spell using a spell slot of 2nd level or hi
 ];
 
 instance Spell ChillTouch[
-  "Chill Touch", .Cantrip, 0, "1 action", "120 feet", ["V", "S"], "1 round", [
+  "Chill Touch", .Necromancy, 0, "1 action", "120 feet", ["V", "S"], "1 round", [
     rangedSpellAction(name, [kind.name], 120, [[1d8, .Necrotic]])
   ], [],
   "You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can’t regain hit points until the start of your next turn. Until then, the hand clings to the target. 
@@ -772,7 +772,7 @@ instance Spell DispelMagic[
 At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell’s level is equal to or less than the level of the spell slot you used."
 ];
 
-instance Ritual Divination[
+instance Ritual Divination_Spell[
   "Divination", .Divination, 4, "1 action", "Self", ["V", "S", "M (incense and a sacrificial offering appropriate to your religion, together worth at least 25 gp, which the spell consumes)"], "Instantaneous", [
     altSpellAction(name, [kind.name], range)
   ], [],
@@ -866,7 +866,7 @@ This spell can have additional effects depending on the terrain in the area, as 
 
 instance Spell EldritchBlast[
   "Eldritch Blast", .Evocation, 0, "1 action", "120 feet", ["V", "S"], "Instantaneous", [
-    rangedSpellAction(name, [kind.name], 120, [1d10, .Force])
+    rangedSpellAction(name, [kind.name], 120, [[1d10, .Force]])
   ], [],
   "A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage. 
 The spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam."
