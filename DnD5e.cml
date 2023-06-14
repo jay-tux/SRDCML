@@ -209,10 +209,26 @@ fun rangedSpellAction(name, tags, range, damages) {
 }
 
 fun rangedDcSpellAction(name, tags, range, stat, damages) {
+  return rangedDcSpellActionTargets(name, tags, range, stat, damages, "one target");
+}
+
+fun rangedDcSpellActionTargets(name, tags, range, stat, damages, targets) {
   var res = .SpellDCAction;
   res.name = name;
   res.tags = tags;
-  res.baseAction = [ "Spell Action", appendStr(range, " ft."), "one target", stat, damages ];
+  res.baseAction = [ "Spell Action", appendStr(range, " ft."), targets, stat, damages ];
+  return res;
+}
+
+fun meleeDcSpellAction(name, tags, reach, stat, damages) {
+  return meleeDcSpellActionTargets(name, tags, reach, stat, damages, "one target");
+}
+
+fun meleeDcSpellActionTargets(name, tags, reach, stat, damages, targets) {
+  var res = .SpellDCAction;
+  res.name = name;
+  res.tags = tags;
+  res.baseAction = [ "Spell Action", reach, targets, stat, damages ];
   return res;
 }
 
